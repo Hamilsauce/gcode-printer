@@ -1,5 +1,5 @@
 import { Point } from './lib/line-drawing.js';
-import { Fusible, Infusible } from '../Fusible.js';
+import { Fusible, Infusible } from './Fusible.js';
 
 // export const loadReadableStream = async (path) => {
 //   fetch(path)
