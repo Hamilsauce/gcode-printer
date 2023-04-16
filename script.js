@@ -4,13 +4,13 @@ import { Fusible, Infusible } from './Fusible.js';
 // import { gcodePaths } from './data/gcode-paths.js';
 import { GCODE_FILES } from './files/index.js';
 import { TransformList, TRANSFORM_TYPES, TRANSFORM_TYPE_INDEX } from './lib/TransformList.js';
-import { Point, delay, zoom, addPanAction } from './lib/index.js';
+import { Point, zoom, addPanAction } from './lib/index.js';
 import { appState } from './lib/AppState.js';
 import { ui } from './lib/UI.js';
-// import { ReadableFile } from './lib/File.js';
+import { ReadableFile } from './lib/File.js';
 import ham from 'https://hamilsauce.github.io/hamhelper/hamhelper1.0.0.js';
 
-const { template, utils, DOM, download } = ham;
+const { template, utils, DOM, download, waitMs } = ham;
 
 const loadGcodeFile = async (path, printPoints = false) => {
   appState.update('appTitle', 'loading...')
@@ -113,7 +113,7 @@ appState.listenOn('filepath', async (filepath) => {
 
   printer.stop();
 
-  await delay(500);
+  await waitMs(500);
 
   const res = await loadGcodeFile(filepath, true);
   console.timeEnd('DRAW POINTS');

@@ -1,4 +1,4 @@
-import { Point, delay, pointsBetween } from './lib/index.js';
+import { Point, waitMs, pointsBetween } from './lib/index.js';
 import { appState } from './lib/AppState.js';
 
 export const loadFile = async (path) => {
@@ -109,7 +109,7 @@ export class GcodePrinter {
 
           this.#path.setAttribute('d', d);
 
-          // await delay(time);
+          // await waitMs(time);
         }
       }
 
@@ -197,7 +197,7 @@ export class GcodePrinter {
 
             this.#currentLayer.setAttribute('d', d);
 
-            await delay(time);
+            await waitMs(time);
           }
         }
 
@@ -205,7 +205,7 @@ export class GcodePrinter {
           d = this.appendToPath(d, command, new Point(x, y));
           this.#currentLayer.setAttribute('d', d);
 
-          await delay(INTERVAL);
+          await waitMs(INTERVAL);
         }
 
         lastPoint = currentPoint;
