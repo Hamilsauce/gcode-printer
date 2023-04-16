@@ -1,0 +1,240 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  z-index: 0;
+}
+
+html {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+
+.app-button {
+  width: fit-content;
+  padding: 4px 8px;
+  color: #F7F7F7;
+  font-size: 20px;
+  font-weight: 800;
+  background: #2F3032;
+  border: 3px solid #373434;
+  filter: opacity(0.95);
+  border-radius: 6px;
+}
+
+
+svg.app-button {
+  /* width: fit-content; */
+  /* padding: 4px 8px; */
+  width: 40px;
+  height: 40px;
+  color: #F7F7F7;
+  font-size: 20px;
+  font-weight: 800;
+  background: #2F3032;
+  border: 2px solid #FFFFFF;
+  filter: opacity(0.95);
+  border-radius: 6px;
+  border-radius: 50%;
+}
+
+
+select {
+  width: 300px;
+  padding: 4px 8px;
+  color: #F7F7F7;
+  font-size: 18px;
+  font-weight: 800;
+  background: #2F3032;
+  border: 3px solid #373434;
+  filter: opacity(0.95);
+  border-radius: 6px;
+  overflow-x: hidden;
+}
+
+.app-button:active {
+  filter: brightness(0.8);
+}
+
+.button-icon {
+  fill: #EAEAEA;
+  color: var(--accent-white);
+}
+
+
+#app {
+  display: grid;
+  /* grid-template-rows: auto 1fr auto; */
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr;
+  gap: 0px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#app-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0px;
+  padding: 0px;
+}
+
+canvas {
+  display: none;
+}
+
+#app-body {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr;
+  gap: 2px;
+  overflow-y: scroll;
+}
+
+#app-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 8px;
+  height: 50px;
+  display: none;
+}
+
+svg {
+  background: #E2D023;
+  touch-action: none;
+}
+
+#scene {
+  transform: translate(-332px, -332px) rotate(0) scale(4);
+}
+
+
+#scene>circle {
+  fill: #00000075;
+  stroke: #E0E0E099;
+  stroke-width: 0.04px;
+}
+
+/* #scene>.G0 {
+  fill: #F75A5AE6;
+  stroke: #E0E0E0D6;
+  stroke-width: 0.04px;
+} */
+
+canvas,
+.gradient1 {
+  background-image:
+    linear-gradient(45deg, rgba(45, 204, 171, 0.89), #F75A5AE6);
+  background-repeat: no-repeat,
+    no-repeat,
+    no-repeat;
+  background-position: bottom right,
+    left,
+    right;
+  filter: hue-rotate(25deg) invert(0.75) brightness(1.2) contrast(2);
+}
+
+#zoom-buttons {
+  position: absolute;
+  left: 8px;
+  bottom: 512px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 4px;
+  padding: 4px;
+}
+
+#controls {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0px;
+  padding: 4px;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  padding: 4px;
+  width: 100%;
+}
+
+
+/* #controls {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  height: 128px;
+  padding: 4px;
+} */
+
+.zoom-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0px;
+  width: 40px;
+  height: 40px;
+  font-size: 22px;
+  border: 2px solid #F6F6F6;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px 1px #00000070;
+}
+
+.axis {
+  stroke: #5A5656CF;
+  stroke-width: 0.5px;
+  filter: invert(1) drop-shadow(0px 0px 0.5px #2A2E56) contrast(3.8) opacity(0.5);
+}
+
+.point {
+  fill: #18A47E91;
+}
+
+
+
+#origin {
+  fill: #21B18A91;
+  stroke: #505F5B91;
+  stroke-width: 0.1px;
+}
+
+.layer-path {
+  fill: transparent;
+  stroke: #C4DAD0;
+  stroke-width: 0.32px;
+  stroke-opacity: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  /* stroke-miterlimit: 4; */
+  /* stroke-dashoffset: 0.2px; */
+  /* filter: brightness(0.1) contrast(1.4) drop-shadow(0 2.5px 0.06px #FFE6C9); */
+  filter: opacity(0.5) invert(1) drop-shadow(0 2.5px 0.06px #FFE6C9);
+  transition: 0.5s;
+}
