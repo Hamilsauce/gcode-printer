@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <title>app</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/7.3.0/rxjs.umd.min.js" integrity="sha512-y3JTS47nnpKORJX8Jn1Rlm+QgRIIZHtu3hWxal0e81avPrqUH48yk+aCi+gprT0RMAcpYa0WCkapxe+bpBHD6g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+  <div id="app">
+    <header id="app-header">
+      <div id="app-header-left">L</div>
+      <div id="app-header-center">
+        <h1 id="app-title">GCODE DICTIONARY</h1>
+      </div>
+      <div id="app-header-right">R</div>
+    </header>
+    <section id="app-body">
+      <div id="g-list-container" class="container">
+        <div class="list-title">G-commands</div>
+        <ul class="list" id="g-list">
+          <li>
+            <div>G0 &amp; G1: </div>
+            <div>Move</div>
+          </li>
+          <li>
+            <div>G2 &amp; G3: </div>
+            <div>Controlled Arc Move</div>
+          </li>
+          <li>
+            <div>G4: </div>
+            <div>Dwell</div>
+          </li>
+          <li>
+            <div>G6: </div>
+            <div>Direct Stepper Move</div>
+          </li>
+          <li>
+            <div>G10: </div>
+            <div>Tool Offset, Retract</div>
+          </li>
+          <li>
+            <div>G12: </div>
+            <div>Clean Tool</div>
+          </li>
+          <li>
+            <div>G17..19: </div>
+            <div>Plane Selection (CNC specific</div>)
+          </li>
+          <li>
+            <div>G20: </div>
+            <div>Set Units to Inches</div>
+          </li>
+          <li>
+            <div>G21: </div>
+            <div>Set Units to Millimeters</div>
+          </li>
+          <li>
+            <div>G22 &amp; G23: </div>
+            <div>Firmware controlled Retract/Precharge</div>
+          </li>
+          <li>
+            <div>G26: </div>
+            <div>Mesh Validation Pattern</div>
+          </li>
+          <li>
+            <div>G28: </div>
+            <div>Move to Origin (Home</div>)
+          </li>
+          <li>
+            <div>G29: </div>
+            <div>Detailed Z-Probe</div>
+          </li>
+          <li>G29 Auto Bed Leveling (Marlin)</li>
+          <li>G29 Unified Bed Leveling (Marlin)</li>
+          <li>G29 Manual Bed Leveling (Marlin)</li>
+          <li>G29 Auto Bed Leveling (Repetier-Firmware)</li>
+          <li>G29 Auto Bed Leveling (RepRapFirmware)</li>
+          <li>
+            <div>G29.1: </div>
+            <div>Set Z probe head offset</div>
+          </li>
+          <li>
+            <div>G29.2: </div>
+            <div>Set Z probe head offset calculated from toolhead position</div>
+          </li>
+          <li>
+            <div>G30: </div>
+            <div>Single Z-Probe</div>
+          </li>
+          <li>
+            <div>G31: </div>
+            <div>Set or Report Current Probe status</div>
+          </li>
+          <li>
+            <div>G31: </div>
+            <div>Dock Z Probe sled</div>
+          </li>
+          <li>
+            <div>G32: </div>
+            <div>Probe Z and calculate Z plane</div>
+          </li>
+          <li>Probe and calculate in Reprapfirmware</li>
+          <li>Probe and calculate in Repetier firmware</li>
+          <li>
+            <div>G32: </div>
+            <div>Undock Z Probe sled</div>
+          </li>
+          <li>
+            <div>G33: </div>
+            <div>Firmware dependent</div>
+          </li>
+          <li>
+            <div>G33: </div>
+            <div>Measure/List/Adjust Distortion Matrix (Repetier - Redeem</div>)
+          </li>
+          <li>
+            <div>G33: </div>
+            <div>Delta Auto Calibration (Marlin 1.1.x</div>)
+          </li>
+          <li>G38.x Straight Probe (CNC specific)</li>
+          <li>G38.2 probe toward workpiece, stop on contact, signal error if failure,&nbsp;</li>
+          <li>G38.3 probe toward workpiece, stop on contact</li>
+          <li>G38.4 probe away from workpiece, stop on loss of contact, signal error if failure</li>
+          <li>G38.5 probe away from workpiece, stop on loss of contact</li>
+          <li>
+            <div>G40: </div>
+            <div>Compensation Off (CNC specific</div>)
+          </li>
+          <li>
+            <div>G42: </div>
+            <div>Move to Grid Point</div>
+          </li>
+          <li>
+            <div>G54..59: </div>
+            <div>Coordinate System Select (CNC specific</div>)
+          </li>
+          <li>
+            <div>G60: </div>
+            <div>save current position to slot</div>
+          </li>
+          <li>
+            <div>G61: </div>
+            <div>Apply/restore saved coordinates to the active extruder</div>.
+          </li>
+          <li>
+            <div>G80: </div>
+            <div>Cancel Canned Cycle (CNC specific</div>)
+          </li>
+          <li>
+            <div>G90: </div>
+            <div>Set to Absolute Positioning</div>
+          </li>
+          <li>
+            <div>G91: </div>
+            <div>Set to Relative Positioning</div>
+          </li>
+          <li>
+            <div>G92: </div>
+            <div>Set Position</div>
+          </li>
+          <li>
+            <div>G92.x: </div>
+            <div>Reset Coordinate System Offsets (CNC specific</div>)
+          </li>
+          <li>
+            <div>G93: </div>
+            <div>Feed Rate Mode (Inverse Time Mode) (CNC specific</div>)
+          </li>
+          <li>
+            <div>G94: </div>
+            <div>Feed Rate Mode (Units per Minute) (CNC specific</div>)
+          </li>
+          <li>
+            <div>G100: </div>
+            <div>Calibrate floor or rod radius</div>
+          </li>
+          <li>
+            <div>G130: </div>
+            <div>Set digital potentiometer value</div>
+          </li>
+          <li>
+            <div>G131: </div>
+            <div>Remove offset</div>
+          </li>
+          <li>
+            <div>G132: </div>
+            <div>Calibrate endstop offsets</div>
+          </li>
+          <li>
+            <div>G133: </div>
+            <div>Measure steps to top</div>
+          </li>
+          <li>
+            <div>G161: </div>
+            <div>Home axes to minimum</div>
+          </li>
+          <li>
+            <div>G162: </div>
+            <div>Home axes to maximum</div>
+          </li>
+        </ul>
+      </div>
+      <div id="m-list-container" class="container">
+        <div class="list-title">M-commands</div>
+        <ul class="list" id="m-list">
+          <li>
+            <div>M0: </div>
+            <div>Stop or Unconditional stop</div>
+          </li>
+          <li>
+            <div>M1: </div>
+            <div>Sleep or Conditional stop</div>
+          </li>
+          <li>
+            <div>M2: </div>
+            <div>Program End</div>
+          </li>
+          <li>
+            <div>M3: </div>
+            <div>Spindle On, Clockwise (CNC specific</div>)
+          </li>
+          <li>
+            <div>M4: </div>
+            <div>Spindle On, Counter-Clockwise (CNC specific</div>)
+          </li>
+          <li>
+            <div>M5: </div>
+            <div>Spindle Off (CNC specific</div>)
+          </li>
+          <li>
+            <div>M6: </div>
+            <div>Tool change</div>
+          </li>
+          <li>
+            <div>M7: </div>
+            <div>Mist Coolant On (CNC specific</div>)
+          </li>
+          <li>
+            <div>M8: </div>
+            <div>Flood Coolant On (CNC specific</div>)
+          </li>
+          <li>
+            <div>M9: </div>
+            <div>Coolant Off (CNC specific</div>)
+          </li>
+          <li>
+            <div>M10: </div>
+            <div>Vacuum On (CNC specific</div>)
+          </li>
+          <li>
+            <div>M11: </div>
+            <div>Vacuum Off (CNC specific</div>)
+          </li>
+          <li>
+            <div>M17: </div>
+            <div>Enable/Power all stepper motors</div>
+          </li>
+          <li>
+            <div>M18: </div>
+            <div>Disable all stepper motors</div>
+          </li>
+          <li>
+            <div>M20: </div>
+            <div>List SD card</div>
+          </li>
+          <li>
+            <div>M21: </div>
+            <div>Initialize SD card</div>
+          </li>
+          <li>
+            <div>M22: </div>
+            <div>Release SD card</div>
+          </li>
+          <li>
+            <div>M23: </div>
+            <div>Select SD file</div>
+          </li>
+          <li>
+            <div>M24: </div>
+            <div>Start/resume SD print</div>
+          </li>
+          <li>
+            <div>M25: </div>
+            <div>Pause SD print</div>
+          </li>
+          <li>
+            <div>M26: </div>
+            <div>Set SD position</div>
+          </li>
+          <li>
+            <div>M27: </div>
+            <div>Report SD print status</div>
+          </li>
+          <li>
+            <div>M28: </div>
+            <div>Begin write to SD card</div>
+          </li>
+          <li>
+            <div>M29: </div>
+            <div>Stop writing to SD card</div>
+          </li>
+          <li>
+            <div>M30: </div>
+            <div>Delete a file on the SD card</div>
+          </li>
+          <li>M30 in grbl</li>
+          <li>
+            <div>M31: </div>
+            <div>Output time since last M109 or SD card start to serial</div>
+          </li>
+          <li>
+            <div>M32: </div>
+            <div>Select file and start SD print</div>
+          </li>
+          <li>
+            <div>M33: </div>
+            <div>Get the long name for an SD card file or folder</div>
+          </li>
+          <li>
+            <div>M33: </div>
+            <div>Stop and Close File and save restart.gcode</div>
+          </li>
+          <li>
+            <div>M34: </div>
+            <div>Set SD file sorting options</div>
+          </li>
+          <li>
+            <div>M35: </div>
+            <div>Upload firmware NEXTION from SD</div>
+          </li>
+          <li>
+            <div>M36: </div>
+            <div>Return file information</div>
+          </li>
+          <li>
+            <div>M37: </div>
+            <div>Simulation mode</div>
+          </li>
+          <li>M38 Compute SHA1 hash of target file</li>
+          <li>
+            <div>M40: </div>
+            <div>Eject</div>
+          </li>
+          <li>
+            <div>M41: </div>
+            <div>Loop</div>
+          </li>
+          <li>
+            <div>M42: </div>
+            <div>Switch I/O pin</div>
+          </li>
+          <li>
+            <div>M43: </div>
+            <div>Stand by on material exhausted</div>
+          </li>
+          <li>
+            <div>M43: </div>
+            <div>Pin report and debug</div>
+          </li>
+          <li>
+            <div>M48: </div>
+            <div>Measure Z-Probe repeatability</div>
+          </li>
+          <li>
+            <div>M70: </div>
+            <div>Display message</div>
+          </li>
+          <li>
+            <div>M72: </div>
+            <div>Play a tone or song</div>
+          </li>
+          <li>
+            <div>M73: </div>
+            <div>Set build percentage</div>
+          </li>
+          <li>
+            <div>M80: </div>
+            <div>ATX Power On</div>
+          </li>
+          <li>
+            <div>M81: </div>
+            <div>ATX Power Off</div>
+          </li>
+          <li>
+            <div>M82: </div>
+            <div>Set extruder to absolute mode</div>
+          </li>
+          <li>
+            <div>M83: </div>
+            <div>Set extruder to relative mode</div>
+          </li>
+          <li>
+            <div>M84: </div>
+            <div>Stop idle hold</div>
+          </li>
+          <li>
+            <div>M85: </div>
+            <div>Set inactivity shutdown timer</div>
+          </li>
+          <li>
+            <div>M92: </div>
+            <div>Set axis_steps_per_unit</div>
+          </li>
+          <li>
+            <div>M93: </div>
+            <div>Send axis_steps_per_unit</div>
+          </li>
+          <li>
+            <div>M98: </div>
+            <div>Call Macro/Subprogram</div>
+          </li>
+          <li>
+            <div>M99: </div>
+            <div>Return from Macro/Subprogram</div>
+          </li>
+          <li>
+            <div>M98: </div>
+            <div>Get axis_hysteresis_mm</div>
+          </li>
+          <li>
+            <div>M99: </div>
+            <div>Set axis_hysteresis_mm</div>
+          </li>
+          <li>
+            <div>M101: </div>
+            <div>Turn extruder 1 on (Forward), Undo Retraction</div>
+          </li>
+          <li>
+            <div>M102: </div>
+            <div>Turn extruder 1 on (Reverse</div>)
+          </li>
+          <li>
+            <div>M103: </div>
+            <div>Turn all extruders off</div>
+          </li>
+          <li>
+            <div>M104: </div>
+            <div>Set Extruder Temperature</div>
+          </li>
+          <li>M104 in Teacup Firmware</li>
+          <li>
+            <div>M105: </div>
+            <div>Get Extruder Temperature</div>
+          </li>
+          <li>
+            <div>M106: </div>
+            <div>Fan On</div>
+          </li>
+          <li>M106 in RepRapFirmware</li>
+          <li>M106 in Teacup Firmware</li>
+          <li>
+            <div>M107: </div>
+            <div>Fan Off</div>
+          </li>
+          <li>
+            <div>M108: </div>
+            <div>Cancel Heating (Marlin</div>)
+          </li>
+          <li>
+            <div>M108: </div>
+            <div>Set Extruder Speed (BFB</div>)
+          </li>
+          <li>
+            <div>M109: </div>
+            <div>Set Extruder Temperature and Wait</div>
+          </li>
+          <li>M109 in Teacup</li>
+          <li>M109 in Marlin, Sprinter (ATmega port), RepRapFirmware</li>
+          <li>M109 in Sprinter (4pi port)</li>
+          <li>M109 in MakerBot</li>
+          <li>
+            <div>M110: </div>
+            <div>Set Current Line Number</div>
+          </li>
+          <li>
+            <div>M111: </div>
+            <div>Set Debug Level</div>
+          </li>
+          <li>M111 in RepRapFirmware</li>
+          <li>M111 in Repetier</li>
+          <li>
+            <div>M112: </div>
+            <div>Emergency Stop</div>
+          </li>
+          <li>
+            <div>M113: </div>
+            <div>Set Extruder PWM</div>
+          </li>
+          <li>
+            <div>M114: </div>
+            <div>Get Current Position</div>
+          </li>
+          <li>
+            <div>M115: </div>
+            <div>Get Firmware Version and Capabilities</div>
+          </li>
+          <li>
+            <div>M116: </div>
+            <div>Wait</div>
+          </li>
+          <li>
+            <div>M117: </div>
+            <div>Get Zero Position</div>
+          </li>
+          <li>
+            <div>M117: </div>
+            <div>Display Message</div>
+          </li>
+          <li>
+            <div>M118: </div>
+            <div>Echo message on host</div>
+          </li>
+          <li>
+            <div>M118: </div>
+            <div>Negotiate Features</div>
+          </li>
+          <li>
+            <div>M119: </div>
+            <div>Get Endstop Status</div>
+          </li>
+          <li>
+            <div>M120: </div>
+            <div>Push</div>
+          </li>
+          <li>
+            <div>M121: </div>
+            <div>Pop</div>
+          </li>
+          <li>
+            <div>M120: </div>
+            <div>Enable endstop detection</div>
+          </li>
+          <li>
+            <div>M121: </div>
+            <div>Disable endstop detection</div>
+          </li>
+          <li>
+            <div>M122: </div>
+            <div>Diagnose</div>
+          </li>
+          <li>
+            <div>M123: </div>
+            <div>Tachometer value</div>
+          </li>
+          <li>
+            <div>M124: </div>
+            <div>Immediate motor stop</div>
+          </li>
+          <li>
+            <div>M126: </div>
+            <div>Open Valve</div>
+          </li>
+          <li>M126 in MakerBot</li>
+          <li>
+            <div>M127: </div>
+            <div>Close Valve</div>
+          </li>
+          <li>M127 in MakerBot</li>
+          <li>
+            <div>M128: </div>
+            <div>Extruder Pressure PWM</div>
+          </li>
+          <li>
+            <div>M129: </div>
+            <div>Extruder pressure off</div>
+          </li>
+          <li>
+            <div>M130: </div>
+            <div>Set PID P value</div>
+          </li>
+          <li>
+            <div>M131: </div>
+            <div>Set PID I value</div>
+          </li>
+          <li>
+            <div>M132: </div>
+            <div>Set PID D value</div>
+          </li>
+          <li>M132 in MakerBot</li>
+          <li>
+            <div>M133: </div>
+            <div>Set PID I limit value</div>
+          </li>
+          <li>M133 in MakerBot</li>
+          <li>
+            <div>M134: </div>
+            <div>Write PID values to EEPROM</div>
+          </li>
+          <li>M134 in MakerBot</li>
+          <li>
+            <div>M135: </div>
+            <div>Set PID sample interval</div>
+          </li>
+          <li>M135 in MakerBot</li>
+          <li>
+            <div>M136: </div>
+            <div>Print PID settings to host</div>
+          </li>
+          <li>
+            <div>M140: </div>
+            <div>Set Bed Temperature (Fast</div>)
+          </li>
+          <li>
+            <div>M141: </div>
+            <div>Set Chamber Temperature (Fast</div>)
+          </li>
+          <li>
+            <div>M142: </div>
+            <div>Holding Pressure</div>
+          </li>
+          <li>
+            <div>M143: </div>
+            <div>Maximum heater temperature</div>
+          </li>
+          <li>
+            <div>M144: </div>
+            <div>Bed Standby</div>
+          </li>
+          <li>
+            <div>M146: </div>
+            <div>Set Chamber Humidity</div>
+          </li>
+          <li>
+            <div>M149: </div>
+            <div>Set temperature units</div>
+          </li>
+          <li>
+            <div>M150: </div>
+            <div>Set display color</div>
+          </li>
+          <li>
+            <div>M155: </div>
+            <div>Automatically send temperatures</div>
+          </li>
+          <li>
+            <div>M160: </div>
+            <div>Number of mixed materials</div>
+          </li>
+          <li>
+            <div>M163: </div>
+            <div>Set weight of mixed material</div>
+          </li>
+          <li>
+            <div>M164: </div>
+            <div>Store weights</div>
+          </li>
+          <li>
+            <div>M165: </div>
+            <div>Set multiple mix weights</div>
+          </li>
+          <li>
+            <div>M190: </div>
+            <div>Wait for bed temperature to reach target temp</div>
+          </li>
+          <li>
+            <div>M191: </div>
+            <div>Wait for chamber temperature to reach target temp</div>
+          </li>
+          <li>
+            <div>M200: </div>
+            <div>Set filament diameter</div>
+          </li>
+          <li>
+            <div>M201: </div>
+            <div>Set max printing acceleration</div>
+          </li>
+          <li>
+            <div>M202: </div>
+            <div>Set max travel acceleration</div>
+          </li>
+          <li>
+            <div>M203: </div>
+            <div>Set maximum feedrate</div>
+          </li>
+          <li>M203 Repetier</li>
+          <li>
+            <div>M204: </div>
+            <div>Set default acceleration</div>
+          </li>
+          <li>M204 Repetier</li>
+          <li>
+            <div>M205: </div>
+            <div>Advanced settings</div>
+          </li>
+          <li>M205 Repetier</li>
+          <li>
+            <div>M206: </div>
+            <div>Offset axes</div>
+          </li>
+          <li>
+            <div>M206 in Repetier: </div>
+            <div>Set eeprom value</div>
+          </li>
+          <li>
+            <div>M207: </div>
+            <div>Calibrate z axis by detecting z max length</div>
+          </li>
+          <li>
+            <div>M207: </div>
+            <div>Set retract length</div>
+          </li>
+          <li>
+            <div>M208: </div>
+            <div>Set axis max travel</div>
+          </li>
+          <li>
+            <div>M208: </div>
+            <div>Set unretract length</div>
+          </li>
+          <li>
+            <div>M209: </div>
+            <div>Enable automatic retract</div>
+          </li>
+          <li>
+            <div>M210: </div>
+            <div>Set homing feedrates</div>
+          </li>
+          <li>
+            <div>M211: </div>
+            <div>Disable/Enable software endstops</div>
+          </li>
+          <li>
+            <div>M212: </div>
+            <div>Set Bed Level Sensor Offset</div>
+          </li>
+          <li>
+            <div>M218: </div>
+            <div>Set Hotend Offset</div>
+          </li>
+          <li>
+            <div>M220: </div>
+            <div>Set speed factor override percentage</div>
+          </li>
+          <li>
+            <div>M221: </div>
+            <div>Set extrude factor override percentage</div>
+          </li>
+          <li>
+            <div>M220: </div>
+            <div>Turn off AUX V1.0.5</div>
+          </li>
+          <li>
+            <div>M221: </div>
+            <div>Turn on AUX V1.0.5</div>
+          </li>
+          <li>
+            <div>M222: </div>
+            <div>Set speed of fast XY moves</div>
+          </li>
+          <li>
+            <div>M223: </div>
+            <div>Set speed of fast Z moves</div>
+          </li>
+          <li>
+            <div>M224: </div>
+            <div>Enable extruder during fast moves</div>
+          </li>
+          <li>
+            <div>M225: </div>
+            <div>Disable on extruder during fast moves</div>
+          </li>
+          <li>
+            <div>M226: </div>
+            <div>Gcode Initiated Pause</div>
+          </li>
+          <li>
+            <div>M226: </div>
+            <div>Wait for pin state</div>
+          </li>
+          <li>
+            <div>M227: </div>
+            <div>Enable Automatic Reverse and Prime</div>
+          </li>
+          <li>
+            <div>M228: </div>
+            <div>Disable Automatic Reverse and Prime</div>
+          </li>
+          <li>
+            <div>M229: </div>
+            <div>Enable Automatic Reverse and Prime</div>
+          </li>
+          <li>
+            <div>M230: </div>
+            <div>Disable / Enable Wait for Temperature Change</div>
+          </li>
+          <li>
+            <div>M231: </div>
+            <div>Set OPS parameter</div>
+          </li>
+          <li>
+            <div>M232: </div>
+            <div>Read and reset max. advance values</div>
+          </li>
+          <li>
+            <div>M240: </div>
+            <div>Trigger camera</div>
+          </li>
+          <li>
+            <div>M240: </div>
+            <div>Start conveyor belt motor / Echo off</div>
+          </li>
+          <li>
+            <div>M241: </div>
+            <div>Stop conveyor belt motor / echo on</div>
+          </li>
+          <li>
+            <div>M245: </div>
+            <div>Start cooler</div>
+          </li>
+          <li>
+            <div>M246: </div>
+            <div>Stop cooler</div>
+          </li>
+          <li>
+            <div>M250: </div>
+            <div>Set LCD contrast</div>
+          </li>
+          <li>
+            <div>M251: </div>
+            <div>Measure Z steps from homing stop (Delta printers</div>)
+          </li>
+          <li>
+            <div>M260: </div>
+            <div>i2c Send Data</div>
+          </li>
+          <li>
+            <div>M261: </div>
+            <div>i2c Request Data</div>
+          </li>
+          <li>
+            <div>M280: </div>
+            <div>Set servo position</div>
+          </li>
+          <li>
+            <div>M290: </div>
+            <div>Baby stepping</div>
+          </li>
+          <li>
+            <div>M291: </div>
+            <div>Display message and optionally wait for response</div>
+          </li>
+          <li>
+            <div>M292: </div>
+            <div>Acknowledge message</div>
+          </li>
+          <li>
+            <div>M300: </div>
+            <div>Play beep sound</div>
+          </li>
+          <li>
+            <div>M302: </div>
+            <div>Allow cold extrudes</div>
+          </li>
+          <li>
+            <div>M303: </div>
+            <div>Run PID tuning</div>
+          </li>
+          <li>
+            <div>M304: </div>
+            <div>Set PID parameters - Bed</div>
+          </li>
+          <li>
+            <div>M304 in RepRapPro version of Marlin: </div>
+            <div>Set thermistor values</div>
+          </li>
+          <li>
+            <div>M305: </div>
+            <div>Set thermistor and ADC parameters</div>
+          </li>
+          <li>
+            <div>M306: </div>
+            <div>Set home offset calculated from toolhead position</div>
+          </li>
+          <li>
+            <div>M307: </div>
+            <div>Set or report heating process parameters</div>
+          </li>
+          <li>
+            <div>M320: </div>
+            <div>Activate autolevel (Repetier</div>)
+          </li>
+          <li>
+            <div>M321: </div>
+            <div>Deactivate autolevel (Repetier</div>)
+          </li>
+          <li>
+            <div>M322: </div>
+            <div>Reset autolevel matrix (Repetier</div>)
+          </li>
+          <li>
+            <div>M323: </div>
+            <div>Distortion correction on/off (Repetier</div>)
+          </li>
+          <li>
+            <div>M340: </div>
+            <div>Control the servos</div>
+          </li>
+          <li>
+            <div>M350: </div>
+            <div>Set microstepping mode</div>
+          </li>
+          <li>
+            <div>M351: </div>
+            <div>Toggle MS1 MS2 pins directly</div>
+          </li>
+          <li>
+            <div>M355: </div>
+            <div>Turn case lights on/off</div>
+          </li>
+          <li>
+            <div>M360: </div>
+            <div>Report firmware configuration</div>
+          </li>
+          <li>
+            <div>M365: </div>
+            <div>SCARA scaling factor</div>
+          </li>
+          <li>
+            <div>M366: </div>
+            <div>SCARA convert trim</div>
+          </li>
+          <li>
+            <div>M370: </div>
+            <div>Morgan manual bed level - clear map</div>
+          </li>
+          <li>
+            <div>M371: </div>
+            <div>Move to next calibration position</div>
+          </li>
+          <li>
+            <div>M372: </div>
+            <div>Record calibration value, and move to next position</div>
+          </li>
+          <li>
+            <div>M373: </div>
+            <div>End bed level calibration mode</div>
+          </li>
+          <li>
+            <div>M374: </div>
+            <div>Save calibration grid</div>
+          </li>
+          <li>
+            <div>M375: </div>
+            <div>Display matrix / Load Matrix</div>
+          </li>
+          <li>
+            <div>M376: </div>
+            <div>Set bed compensation taper</div>
+          </li>
+          <li>
+            <div>M380: </div>
+            <div>Activate solenoid</div>
+          </li>
+          <li>
+            <div>M381: </div>
+            <div>Disable all solenoids</div>
+          </li>
+          <li>
+            <div>M400: </div>
+            <div>Wait for current moves to finish</div>
+          </li>
+          <li>
+            <div>M401: </div>
+            <div>Lower z-probe</div>
+          </li>
+          <li>
+            <div>M402: </div>
+            <div>Raise z-probe</div>
+          </li>
+          <li>
+            <div>M404: </div>
+            <div>Filament width and nozzle diameter</div>
+          </li>
+          <li>
+            <div>M405: </div>
+            <div>Filament Sensor on</div>
+          </li>
+          <li>
+            <div>M406: </div>
+            <div>Filament Sensor off</div>
+          </li>
+          <li>
+            <div>M407: </div>
+            <div>Display filament diameter</div>
+          </li>
+          <li>
+            <div>M408: </div>
+            <div>Report JSON-style response</div>
+          </li>
+          <li>
+            <div>M420: </div>
+            <div>Set RGB Colors as PWM (MachineKit</div>)
+          </li>
+          <li>
+            <div>M420: </div>
+            <div>Leveling On/Off/Fade (Marlin</div>)
+          </li>
+          <li>
+            <div>M421: </div>
+            <div>Set a Mesh Bed Leveling Z coordinate</div>
+          </li>
+          <li>
+            <div>M450: </div>
+            <div>Report Printer Mode</div>
+          </li>
+          <li>
+            <div>M451: </div>
+            <div>Select FFF Printer Mode</div>
+          </li>
+          <li>
+            <div>M452: </div>
+            <div>Select Laser Printer Mode</div>
+          </li>
+          <li>
+            <div>M453: </div>
+            <div>Select CNC Printer Mode</div>
+          </li>
+          <li>
+            <div>M460: </div>
+            <div>Define temperature range for thermistor-controlled fan</div>
+          </li>
+          <li>
+            <div>M500: </div>
+            <div>Store parameters in EEPROM</div>
+          </li>
+          <li>
+            <div>M501: </div>
+            <div>Read parameters from EEPROM</div>
+          </li>
+          <li>
+            <div>M502: </div>
+            <div>Revert to the default "factory settings</div>."
+          </li>
+          <li>
+            <div>M503: </div>
+            <div>Print settings</div>
+          </li>
+          <li>
+            <div>M530: </div>
+            <div>Enable printing mode</div>
+          </li>
+          <li>
+            <div>M531: </div>
+            <div>Set print name</div>
+          </li>
+          <li>
+            <div>M532: </div>
+            <div>Set print progress</div>
+          </li>
+          <li>
+            <div>M540: </div>
+            <div>Enable/Disable "Stop SD Print on Endstop Hit</div>"
+          </li>
+          <li>
+            <div>M540: </div>
+            <div>Set MAC address</div>
+          </li>
+          <li>
+            <div>M550: </div>
+            <div>Set Name</div>
+          </li>
+          <li>
+            <div>M551: </div>
+            <div>Set Password</div>
+          </li>
+          <li>
+            <div>M552: </div>
+            <div>Set IP address, enable/disable network interface</div>
+          </li>
+          <li>
+            <div>M553: </div>
+            <div>Set Netmask</div>
+          </li>
+          <li>
+            <div>M554: </div>
+            <div>Set Gateway</div>
+          </li>
+          <li>
+            <div>M555: </div>
+            <div>Set compatibility</div>
+          </li>
+          <li>
+            <div>M556: </div>
+            <div>Axis compensation</div>
+          </li>
+          <li>
+            <div>M557: </div>
+            <div>Set Z probe point or define probing grid</div>
+          </li>
+          <li>
+            <div>M558: </div>
+            <div>Set Z probe type</div>
+          </li>
+          <li>
+            <div>M559: </div>
+            <div>Upload configuration file</div>
+          </li>
+          <li>
+            <div>M560: </div>
+            <div>Upload web page file</div>
+          </li>
+          <li>
+            <div>M561: </div>
+            <div>Set Identity Transform</div>
+          </li>
+          <li>
+            <div>M562: </div>
+            <div>Reset temperature fault</div>
+          </li>
+          <li>
+            <div>M563: </div>
+            <div>Define or remove a tool</div>
+          </li>
+          <li>
+            <div>M564: </div>
+            <div>Limit axes</div>
+          </li>
+          <li>
+            <div>M565: </div>
+            <div>Set Z probe offset</div>
+          </li>
+          <li>
+            <div>M566: </div>
+            <div>Set allowable instantaneous speed change</div>
+          </li>
+          <li>
+            <div>M567: </div>
+            <div>Set tool mix ratios</div>
+          </li>
+          <li>
+            <div>M568: </div>
+            <div>Turn off/on tool mix ratios</div>
+          </li>
+          <li>
+            <div>M569: </div>
+            <div>Set axis direction and enable values</div>
+          </li>
+          <li>
+            <div>M570: </div>
+            <div>Configure heater fault detection</div>
+          </li>
+          <li>
+            <div>M571: </div>
+            <div>Set output on extrude</div>
+          </li>
+          <li>
+            <div>M572: </div>
+            <div>Set or report extruder pressure advance</div>
+          </li>
+          <li>
+            <div>M573: </div>
+            <div>Report heater PWM</div>
+          </li>
+          <li>
+            <div>M574: </div>
+            <div>Set endstop configuration</div>
+          </li>
+          <li>
+            <div>M575: </div>
+            <div>Set serial comms parameters</div>
+          </li>
+          <li>
+            <div>M577: </div>
+            <div>Wait until endstop is triggered</div>
+          </li>
+          <li>
+            <div>M578: </div>
+            <div>Fire inkjet bits</div>
+          </li>
+          <li>
+            <div>M579: </div>
+            <div>Scale Cartesian axes</div>
+          </li>
+          <li>
+            <div>M580: </div>
+            <div>Select Roland</div>
+          </li>
+          <li>
+            <div>M581: </div>
+            <div>Configure external trigger</div>
+          </li>
+          <li>
+            <div>M582: </div>
+            <div>Check external trigger</div>
+          </li>
+          <li>
+            <div>M583: </div>
+            <div>Wait for pin</div>
+          </li>
+          <li>
+            <div>M584: </div>
+            <div>Set drive mapping</div>
+          </li>
+          <li>
+            <div>M585: </div>
+            <div>Probe Tool</div>
+          </li>
+          <li>
+            <div>M586: </div>
+            <div>Configure network protocols</div>
+          </li>
+          <li>
+            <div>M587: </div>
+            <div>Store WiFi host network in list, or list stored networks</div>
+          </li>
+          <li>
+            <div>M588: </div>
+            <div>Forget WiFi host network</div>
+          </li>
+          <li>
+            <div>M589: </div>
+            <div>Configure access point parameters</div>
+          </li>
+          <li>
+            <div>M590: </div>
+            <div>Report current tool type and index</div>
+          </li>
+          <li>
+            <div>M591: </div>
+            <div>Configure filament sensing</div>
+          </li>
+          <li>
+            <div>M600: </div>
+            <div>Set line cross section</div>
+          </li>
+          <li>
+            <div>M600: </div>
+            <div>Filament change pause</div>
+          </li>
+          <li>
+            <div>M605: </div>
+            <div>Set dual x-carriage movement mode</div>
+          </li>
+          <li>
+            <div>M665: </div>
+            <div>Set delta configuration</div>
+          </li>
+          <li>
+            <div>M666: </div>
+            <div>Set delta endstop adjustment</div>
+          </li>
+          <li>
+            <div>M667: </div>
+            <div>Select CoreXY mode</div>
+          </li>
+          <li>
+            <div>M668: </div>
+            <div>Set Z-offset compensations polynomial</div>
+          </li>
+          <li>
+            <div>M669: </div>
+            <div>Set kinematics type and kinematics parameters</div>
+          </li>
+          <li>
+            <div>M670: </div>
+            <div>Set IO port bit mapping</div>
+          </li>
+          <li>
+            <div>M671: </div>
+            <div>Define positions of Z leadscrews or bed levelling screws</div>
+          </li>
+          <li>
+            <div>M672: </div>
+            <div>Program Z probe</div>
+          </li>
+          <li>
+            <div>M700: </div>
+            <div>Level plate</div>
+          </li>
+          <li>
+            <div>M701: </div>
+            <div>Load filament</div>
+          </li>
+          <li>
+            <div>M702: </div>
+            <div>Unload filament</div>
+          </li>
+          <li>
+            <div>M703: </div>
+            <div>Get Board Type</div>
+          </li>
+          <li>
+            <div>M710: </div>
+            <div>Erase the EEPROM and reset the board</div>
+          </li>
+          <li>
+            <div>M750: </div>
+            <div>Enable 3D scanner extension</div>
+          </li>
+          <li>
+            <div>M751: </div>
+            <div>Register 3D scanner extension over USB</div>
+          </li>
+          <li>
+            <div>M752: </div>
+            <div>Start 3D scan</div>
+          </li>
+          <li>
+            <div>M753: </div>
+            <div>Cancel current 3D scanner action</div>
+          </li>
+          <li>
+            <div>M754: </div>
+            <div>Calibrate 3D scanner</div>
+          </li>
+          <li>
+            <div>M755: </div>
+            <div>Set alignment mode for 3D scanner</div>
+          </li>
+          <li>
+            <div>M756: </div>
+            <div>Shutdown 3D scanner</div>
+          </li>
+          <li>
+            <div>M800: </div>
+            <div>Fire start print procedure</div>
+          </li>
+          <li>
+            <div>M801: </div>
+            <div>Fire end print procedure</div>
+          </li>
+          <li>
+            <div>M851: </div>
+            <div>Set Z-Probe Offset</div>
+          </li>
+          <li>M851 in Marlin 1.0.2</li>
+          <li>M851 in Marlin 1.1.0</li>
+          <li>M851 in MK4duo 4.3.25</li>
+          <li>M900 Set Linear Advance Scaling Factors</li>
+          <li>
+            <div>M905: </div>
+            <div>Set local date and time</div>
+          </li>
+          <li>
+            <div>M906: </div>
+            <div>Set motor currents</div>
+          </li>
+          <li>
+            <div>M907: </div>
+            <div>Set digital trimpot motor</div>
+          </li>
+          <li>
+            <div>M908: </div>
+            <div>Control digital trimpot directly</div>
+          </li>
+          <li>
+            <div>M909: </div>
+            <div>Set microstepping</div>
+          </li>
+          <li>
+            <div>M910: </div>
+            <div>Set decay mode</div>
+          </li>
+          <li>
+            <div>M911: </div>
+            <div>Enable auto save and set threshold voltages</div>
+          </li>
+          <li>
+            <div>M912: </div>
+            <div>Set electronics temperature monitor adjustment</div>
+          </li>
+          <li>
+            <div>M913: </div>
+            <div>Set motor percentage of normal current</div>
+          </li>
+          <li>
+            <div>M914: </div>
+            <div>Set/Get Expansion Voltage Level Translator</div>
+          </li>
+          <li>
+            <div>M928: </div>
+            <div>Start SD logging</div>
+          </li>
+          <li>
+            <div>M997: </div>
+            <div>Perform in-application firmware update</div>
+          </li>
+          <li>
+            <div>M998: </div>
+            <div>Request resend of line</div>
+          </li>
+          <li>
+            <div>M999: </div>
+            <div>Restart after being stopped by error</div>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <footer id="app-footer">
+      <div class="container">
+        footer
+      </div>
+    </footer>
+  </div>
+  <!-- <script src="./script.js" type="module"></script> -->
+  <script src="./test.js" type="module"></script>
+</body>
+
+</html>

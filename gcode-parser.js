@@ -79,13 +79,9 @@ export class GcodeParser { //extends Infusible {
   async parse(gcodeString) {
     console.time('newLines')
 
-    // const newLines = gcodeString.split('\n').length
     const newLines = await this.countLines(gcodeString)
 
-
     console.timeEnd('newLines')
-
-    console.log('newLines', newLines)
 
     return gcodeString.split('\n')
       .filter(_ => !_.trim().startsWith(';'))

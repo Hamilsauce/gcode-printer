@@ -1,5 +1,5 @@
-import { Point, waitMs, pointsBetween } from './lib/index.js';
-import { appState } from './lib/AppState.js';
+import { Point, waitMs, pointsBetween } from '../lib/index.js';
+import { appState } from '../lib/AppState.js';
 import ham from 'https://hamilsauce.github.io/hamhelper/hamhelper1.0.0.js';
 const { template, utils, download } = ham;
 export const loadFile = async (path) => {
@@ -15,7 +15,6 @@ export class GcodePrinter {
   #commandQueue = [];
   #layers = new Map()
   #currentLayer = null;
-  #currentPoint = new Point(0, 0);
   #commands = [];
   #position = { x: 0, y: 0, z: 0, e: 0 };
   #isPrinting = false;
@@ -25,7 +24,6 @@ export class GcodePrinter {
     this.#canvas = canvas;
 
     this.#scene = canvas.querySelector('#scene');
-    this.run = this.#run.bind(this);
 
     appState.listenOn('rotation', async (rotation) => {
       if (this.#currentLayer) {
@@ -37,8 +35,6 @@ export class GcodePrinter {
   }
 
   get currentLayer() { return this.#currentLayer }
-
-  get currentPoint() { return this.#currentPoint }
 
   createLayerPath(z) {
     const p = this.#canvas.querySelector('#layer-path-template').cloneNode(true);
@@ -91,7 +87,6 @@ export class GcodePrinter {
     }
 
     else {
-
       const { command, x, y, z, e } = this.currentPoint;
 
       if (this.lastPoint && command === 'G1') {
@@ -128,83 +123,9 @@ export class GcodePrinter {
     }
   }
 
-
-
-  async #run(cmd, onCompleteHandler = () => null) {
-    let INTERVAL = 8
-    const { command, x, y, z, e } = cmd;
-
-    let d = ''
-
-    // HANDLE LAYER RESOLUTION
-    if (z) {
-      d = '';
-
-      if (!this.#layers.has(z)) {
-        this.#layers.set(z, this.createLayerPath(z));
-      }
-
-      this.#currentLayer = this.#layers.get(z);
-
-      this.#scene.append(this.#currentLayer);
-    }
-    d = this.#currentLayer.getAttribute('d') || '';
-
-    if (command == 'G0') {
-      const p = document.createElementNS(this.#canvas.namespaceURI, 'circle');
-
-      p.r.baseVal.value = 0.15;
-      p.cy.baseVal.value = (+y || 1);
-      p.cx.baseVal.value = (+x || 1);
-      p.classList.add('G0');
-
-      this.#scene.append(p);
-    }
-
-    // console.log('this.currentPoint', this.#currentPoint)
-    if (this.currentPoint && command === 'G1') {
-      const pts = [
-        this.currentPoint,
-        ...pointsBetween(this.currentPoint, { x, y }).map(_ => ({ ..._, command })),
-        { command, x, y }
-      ];
-
-      // const time = INTERVAL ? INTERVAL / pts.length : 0;
-      const time = INTERVAL ? (4 / 16) * 100 : 0
-      // console.warn('time', time)  
-      // console.log('pts', pts)
-
-      for (let n = 0; n < pts.length; n++) {
-        const pt = pts[n];
-
-        d = this.appendToPath(d, command, new Point(pt.x, pt.y));
-
-
-        this.#currentLayer.setAttribute('d', d);
-        await waitMs(INTERVAL / pts.length);
-        // await waitMs(time);
-      }
-    }
-
-    else {
-      d = this.appendToPath(d, command, new Point(x, y));
-      this.#currentLayer.setAttribute('d', d);
-
-      await waitMs(INTERVAL);
-    }
-
-    this.#currentPoint = { x, y, z } //new Point(x, y);
-
-    return this.#currentPoint;
-  }
-
-
   async print(commands = [], onCompleteHandler = () => null) {
-    this.stop()
-
     this.#commands = commands;
     this.drawCommands = commands.filter(({ command, x, y }) => !(isNaN(x) || isNaN(y)) && ['G0', 'G1'].includes(command));
-    this.#scene.innerHTML = '';
 
     this.#layers = new Map(
       [
@@ -222,24 +143,69 @@ export class GcodePrinter {
     if (cmds[0] && cmds[0].x && cmds[0].y) {
       let frameId = null;
       let lastPoint = null;
-      let currentCmd = null;
+      let currentPoint = null;
       let d = 'M ';
 
       this.#scene.append(this.#currentLayer);
       this.#isPrinting = true;
       this.#cursor = 0;
-      currentCmd = cmds[this.#cursor];
+      currentPoint = cmds[this.#cursor];
 
       const INTERVAL = 0;
 
-      while (this.#isPrinting === true && this.#currentPoint) {
-        currentCmd = cmds[this.#cursor];
-        await this.run(currentCmd);
+      while (this.#isPrinting === true && currentPoint) {
+        const { command, x, y, z, e } = currentPoint;
+
+        if (command == 'G0') {
+          const p = document.createElementNS(this.#canvas.namespaceURI, 'circle');
+
+          p.r.baseVal.value = 0.15;
+          p.cy.baseVal.value = (+y || 1);
+          p.cx.baseVal.value = (+x || 1);
+          p.classList.add('G0');
+
+          this.#scene.append(p);
+        }
+
+        if (z) {
+          d = '';
+          this.#currentLayer = this.#layers.get(z);
+          this.#scene.append(this.#currentLayer);
+        }
+
+        if (lastPoint && command === 'G1') {
+          const pts = [
+            lastPoint,
+            ...pointsBetween(lastPoint, { x, y }).map(_ => ({ ..._, command })),
+            { command, x, y }
+          ];
+
+          const time = INTERVAL ? INTERVAL / pts.length : 0;
+
+          for (let n = 0; n < pts.length; n++) {
+            const pt = pts[n];
+
+            d = this.appendToPath(d, command, new Point(pt.x, pt.y));
+
+            this.#currentLayer.setAttribute('d', d);
+
+            await waitMs(time);
+          }
+        }
+
+        else {
+          d = this.appendToPath(d, command, new Point(x, y));
+          this.#currentLayer.setAttribute('d', d);
+
+          await waitMs(INTERVAL);
+        }
+
+        lastPoint = currentPoint;
+
         this.#cursor = this.#cursor + 1;
 
-        this.#isPrinting = this.#isPrinting === false ? false : !!cmds[this.#cursor];
+        currentPoint = cmds[this.#cursor];
       }
-      console.warn('this.#isPrinting', this.#isPrinting)
 
       this.stop();
 

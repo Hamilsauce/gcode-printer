@@ -1,7 +1,9 @@
 import { GcodeParser, loadFile } from './gcode-parser.js';
-import { GcodePrinter } from './gcode-printer.js';
+
+// import { GcodePrinter } from './gcode-printer.js';
+import { GcodePrinter } from './.backup/printer_backup.js';
+
 import { Fusible, Infusible } from './Fusible.js';
-// import { gcodePaths } from './data/gcode-paths.js';
 import { GCODE_FILES } from './files/index.js';
 import { TransformList, TRANSFORM_TYPES, TRANSFORM_TYPE_INDEX } from './lib/TransformList.js';
 import { Point, zoom, addPanAction } from './lib/index.js';
@@ -10,7 +12,13 @@ import { ui } from './lib/UI.js';
 import { ReadableFile } from './lib/File.js';
 import ham from 'https://hamilsauce.github.io/hamhelper/hamhelper1.0.0.js';
 
-const { template, utils, DOM, download, waitMs } = ham;
+// import {longPress} from 'https://hamilsauce.github.io/hamhelper/hamhelper1.0.0.js';
+
+
+
+const { template, utils, DOM, download, waitMs, event } = ham;
+// console.log('addPanAction', addPanAction)
+// console.warn('ham.prototype', ham.prototype)
 
 const loadGcodeFile = async (path, printPoints = false) => {
   appState.update('appTitle', 'loading...')
@@ -19,7 +27,12 @@ const loadGcodeFile = async (path, printPoints = false) => {
   const rawGcode = await printer.loadGcode(path)
   const gcodeLines = await parser.parse(rawGcode)
 
+  const gcodeGrouped = await parser.groupByCommandType(gcodeLines)
+  console.warn('gcodeGrouped', gcodeGrouped)
+  
   const gcodeCoords = gcodeLines.filter(_ => !!_.x && !!_.y);
+
+  // const gcodeCoords = gcodeLines.filter(_ => !!_.x && !!_.y);
 
   ui.scene.innerHTML = '';
 
@@ -27,27 +40,27 @@ const loadGcodeFile = async (path, printPoints = false) => {
 
   let currentZ = 0;
 
-  if (drawPoints) {
-    ui.scene.append(...(
-      await Promise.all(
-        gcodeCoords.map((async (code, i) => {
-          currentZ = +code.z ? +code.z : currentZ;
+  // if (drawPoints) {
+  //   ui.scene.append(...(
+  //     await Promise.all(
+  //       gcodeCoords.map((async (code, i) => {
+  //         currentZ = +code.z ? +code.z : currentZ;
 
-          const p = document.createElementNS(ui.svg.namespaceURI, 'circle');
+  //         const p = document.createElementNS(ui.svg.namespaceURI, 'circle');
 
-          p.r.baseVal.value = 0.15;
-          p.cy.baseVal.value = (+code.x || 1);
-          p.cx.baseVal.value = (currentZ || 0);
+  //         p.r.baseVal.value = 0.15;
+  //         p.cy.baseVal.value = (+code.x || 1);
+  //         p.cx.baseVal.value = (currentZ || 0);
 
-          if (code.command === 'G0') {
-            p.classList.add('G0')
-          }
+  //         if (code.command === 'G0') {
+  //           p.classList.add('G0')
+  //         }
 
-          return p;
-        }))
-      )
-    ));
-  }
+  //         return p;
+  //       }))
+  //     )
+  //   ));
+  // }
 
   appState.update('appTitle', '3D Printer');
 
@@ -128,9 +141,13 @@ const pan$ = addPanAction(ui.svg, ({ x, y }) => {
 pan$.subscribe();
 
 
+let zoomDragSub = null;
+
 setTimeout(() => {
   const svg = ui.svg;
   const scene = svg.querySelector('#scene');
+
+
 
   ui.zoom.container.addEventListener('click', e => {
     e.preventDefault();
@@ -154,7 +171,7 @@ setTimeout(() => {
     }
   });
 
-  ui.scene.addEventListener('click', e => {
+  ui.svg.addEventListener('click', e => {
     e.preventDefault();
     e.stopPropagation();
     e.stopImmediatePropagation();

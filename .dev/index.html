@@ -23,9 +23,31 @@
       <div id="app-header-right">R</div>
     </header>
     <section id="app-body">
-      <div class="container">
-        Body
-      </div>
+      <svg id="svg-canvas" style="background:#2B35A5;" width="412" height="690" viewBox="-50 -50 100 100" preserveAspectRatio="xMidYMid meet" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <g id="circle-container">
+            <circle id="circle-template" fill="teal" cx="0" cy="0" r=" 10" stroke="#000000" stroke-width="1" transform="translate(0,0) rotate(0) scale(1)" />
+          </g>
+
+        </defs>
+        <g id="scene" transform="translate(0,0) rotate(0) scale(1)">
+          <!-- <rect x="0" y="0" rx="0" ry="0" width="412" height="690" fill="#C7C7C7"></rect> -->
+
+          <!-- <line x1=" 2" y1="2" x2=" 7" y2="7"></line> -->
+          <!-- <line x1="25" y1="2" x2="20" y2="7"></line> -->
+          <path class="botLeft" stroke="#000000" stroke-width="1px"  d="
+            M -45,-75
+              -0,0
+            
+            M 6,-6 
+              -0,-75
+          "></path>
+          <!-- <path class="botRite" d="m 26,26 -6,-6"></path> -->
+          <!-- <rect x="1" y="1" rx="3" ry="3" width="25" height="25"></rect> -->
+          <!-- <path class="rectIn" d="m 7,7 0,13 13,0 0,-13 z" style="fill:gray;"></path> -->
+        </g>
+        <!-- <use href="#circle-container"></use> -->
+      </svg>
     </section>
     <footer id="app-footer">
       <div class="container">
@@ -33,7 +55,8 @@
       </div>
     </footer>
   </div>
-  <script src="../lib/line-drawing.js" type="module"></script>
+  <script src="./benchmark-file-load.js" type="module"></script>
+  <!-- <script src="../lib/line-drawing.js" type="module"></script> -->
 </body>
 
 </html>

@@ -1,4 +1,7 @@
 import { GcodeParser, loadFile } from './gcode-parser.js';
+
+
+
 const app = document.querySelector('#app');
 const appBody = document.querySelector('#app-body')
 const containers = document.querySelectorAll('.container')
@@ -6,12 +9,15 @@ const list = document.querySelector('#list');
 
 const parser = new GcodeParser()
 
+
+
 const rawGcode = await loadFile('./whistle.gcode')
 console.log('rawGcode', rawGcode)
 
 
-const gcodeItemEls = [...document.querySelectorAll('.gcode.item')]
-const labelEls = [...document.querySelectorAll('.label')]
+const gcodeItemEls = [...document.querySelectorAll('.gcode.item')];
+
+const labelEls = [...document.querySelectorAll('.label')];
 // console.log('gcodeItemEls', gcodeItemEls[0].textContent)
 
 

@@ -3,6 +3,7 @@
   padding: 0;
   margin: 0;
   z-index: 0;
+  user-select: none;
 }
 
 html {
@@ -27,7 +28,13 @@ body {
   border: 3px solid #373434;
   filter: opacity(0.95);
   border-radius: 6px;
+
 }
+
+.app-button:active {
+  filter: brightness(0.8);
+}
+
 
 
 svg.app-button {
@@ -46,6 +53,7 @@ svg.app-button {
 }
 
 
+
 select {
   width: 300px;
   padding: 4px 8px;
@@ -59,9 +67,6 @@ select {
   overflow-x: hidden;
 }
 
-.app-button:active {
-  filter: brightness(0.8);
-}
 
 .button-icon {
   fill: #EAEAEA;
