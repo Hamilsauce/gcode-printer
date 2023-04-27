@@ -1,7 +1,5 @@
 import { GcodeParser, loadFile } from './gcode-parser.js';
-
-// import { GcodePrinter } from './gcode-printer.js';
-import { GcodePrinter } from './.backup/printer_backup.js';
+import { GcodePrinter } from './printer/gcode-printer.js'
 
 import { Fusible, Infusible } from './Fusible.js';
 import { GCODE_FILES } from './files/index.js';
@@ -17,26 +15,29 @@ import ham from 'https://hamilsauce.github.io/hamhelper/hamhelper1.0.0.js';
 
 
 const { template, utils, DOM, download, waitMs, event } = ham;
-// console.log('addPanAction', addPanAction)
-// console.warn('ham.prototype', ham.prototype)
 
 const loadGcodeFile = async (path, printPoints = false) => {
   appState.update('appTitle', 'loading...')
 
   const drawPoints = appState.select('drawPoints')
   const rawGcode = await printer.loadGcode(path)
+
+  console.time('PARSE');
   const gcodeLines = await parser.parse(rawGcode)
+  console.timeEnd('PARSE');
 
   const gcodeGrouped = await parser.groupByCommandType(gcodeLines)
   console.warn('gcodeGrouped', gcodeGrouped)
-  
+
   const gcodeCoords = gcodeLines.filter(_ => !!_.x && !!_.y);
 
   // const gcodeCoords = gcodeLines.filter(_ => !!_.x && !!_.y);
 
   ui.scene.innerHTML = '';
 
-  printer.print(gcodeLines);
+  console.time('PRINT');
+  await printer.print(gcodeLines);
+  console.timeEnd('PRINT');
 
   let currentZ = 0;
 
@@ -116,7 +117,6 @@ appState.listenOn('appTitle', async (title) => {
   ui.appTitle.textContent = title;
 });
 
-
 appState.listenOn('rotation', async (rotation) => {
   console.log('rotation', rotation)
 });
@@ -146,8 +146,6 @@ let zoomDragSub = null;
 setTimeout(() => {
   const svg = ui.svg;
   const scene = svg.querySelector('#scene');
-
-
 
   ui.zoom.container.addEventListener('click', e => {
     e.preventDefault();

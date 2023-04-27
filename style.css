@@ -241,5 +241,5 @@ canvas,
   /* stroke-dashoffset: 0.2px; */
   /* filter: brightness(0.1) contrast(1.4) drop-shadow(0 2.5px 0.06px #FFE6C9); */
   filter: opacity(0.5) invert(1) drop-shadow(0 2.5px 0.06px #FFE6C9);
-  transition: 0.5s;
+  /* transition: 0.5s; */
 }

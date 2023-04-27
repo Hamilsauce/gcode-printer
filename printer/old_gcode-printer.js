@@ -71,6 +71,11 @@ export class GcodePrinter {
     cancelAnimationFrame(this.#frameId);
     this.#isPrinting = false;
     this.#frameId = null;
+    this.lastPoint = null;
+    this.#cursor = 0;
+    this.#layers.clear();
+    this.#currentLayer = null;
+    this.#currentPoint = new Point(0, 0);
 
     console.warn('[PRINTER STOPPED]');
   }
@@ -146,8 +151,12 @@ export class GcodePrinter {
 
       this.#currentLayer = this.#layers.get(z);
 
-      this.#scene.append(this.#currentLayer);
+      if (!this.#currentLayer.parentElement) {
+        this.#scene.append(this.#currentLayer);
+      }
     }
+
+
     d = this.#currentLayer.getAttribute('d') || '';
 
     if (command == 'G0') {
@@ -234,12 +243,15 @@ export class GcodePrinter {
 
       while (this.#isPrinting === true && this.#currentPoint) {
         currentCmd = cmds[this.#cursor];
+
         await this.run(currentCmd);
+
         this.#cursor = this.#cursor + 1;
 
         this.#isPrinting = this.#isPrinting === false ? false : !!cmds[this.#cursor];
       }
-      console.warn('this.#isPrinting', this.#isPrinting)
+
+      console.warn('~~~~~~~~~ Print End', this.#isPrinting);
 
       this.stop();
 
