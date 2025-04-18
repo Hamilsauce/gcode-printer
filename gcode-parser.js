@@ -42,9 +42,8 @@ import { Fusible, Infusible } from './Fusible.js';
 //     });
 
 // };
-
-
 // await loadReadableStream('./files/ball2.gcode')
+
 
 export const loadFile = async (path) => {
   const res = (await fetch(path));
@@ -53,7 +52,7 @@ export const loadFile = async (path) => {
   return await (await fetch(path)).text();
 };
 
-export class GcodeParser { //extends Infusible {
+export class GcodeParser {
   constructor(target) {}
 
   async loadGcode(path = '', parse = false) {
@@ -67,7 +66,6 @@ export class GcodeParser { //extends Infusible {
         [curr.command]: acc[curr.command] ? [...acc[curr.command], curr] : [curr],
         count: acc.count + 1
       }
-
     }, { count: 0 });
   }
 
@@ -75,13 +73,11 @@ export class GcodeParser { //extends Infusible {
     return await (gcodeString.match(/\n/g) || []).length
   }
 
-
   async parse(gcodeString) {
-    console.time('newLines')
 
     const newLines = await this.countLines(gcodeString)
 
-    console.timeEnd('newLines')
+    console.log('newLines', newLines)
 
     return gcodeString.split('\n')
       .filter(_ => !_.trim().startsWith(';'))

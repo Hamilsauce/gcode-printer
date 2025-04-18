@@ -111,7 +111,7 @@ export class GcodePrinter {
       // HANDLE LAYER RESOLUTION
       if (z) {
         d = '';
-
+console.warn('LAYER z', z)
         if (!this.#layers.has(z)) {
           this.#layers.set(z, this.createLayerPath(z));
         }
