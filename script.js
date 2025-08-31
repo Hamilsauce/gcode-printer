@@ -7,12 +7,24 @@ import { TransformList, TRANSFORM_TYPES, TRANSFORM_TYPE_INDEX } from './lib/Tran
 import { Point, zoom, addPanAction } from './lib/index.js';
 import { appState } from './lib/AppState.js';
 import { ui } from './lib/UI.js';
-import { ReadableFile } from './lib/File.js';
 import ham from 'https://hamilsauce.github.io/hamhelper/hamhelper1.0.0.js';
-
+import { svgUnitsToPixels } from './lib/svg-units-to-pixels.js';
 // import {longPress} from 'https://hamilsauce.github.io/hamhelper/hamhelper1.0.0.js';
 
+export const setCanvasHeight = (canvas = document.querySelector('svg')) => {
+  const parentHeight = +getComputedStyle(canvas.parentElement).height.replace(/[^0-9.]/g, '');
+  const canvasHeight = parentHeight >= 900 ? 900 : parentHeight;
+  canvas.style.height = `${(canvasHeight)}px`;
+};
 
+window.addEventListener('resize', (e) => {
+  const canvasEl = document.querySelector('svg')
+  const scene = document.querySelector('#scene')
+  setCanvasHeight(canvasEl);
+const sceneWidthPixels = svgUnitsToPixels(canvasEl, scene)
+  
+  canvasEl.style.width = sceneWidthPixels + 'px'
+});
 
 const { template, utils, DOM, download, waitMs, event } = ham;
 

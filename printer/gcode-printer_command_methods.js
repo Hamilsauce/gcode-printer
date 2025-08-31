@@ -1,3 +1,4 @@
+
 /*
   Creates and draws layer paths
   
@@ -27,12 +28,10 @@
 */
 
 
-
 export class GcodePrinter {
   #svg = null;
   #layers = new Map();
   #z = -1;
-  // #currentLayer =  // replace with Point 
   #currentPoint = { x: 0, y: 0 } // replace with Point 
 
 
