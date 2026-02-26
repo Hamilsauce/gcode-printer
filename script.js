@@ -10,6 +10,9 @@ import { ui } from './lib/UI.js';
 import ham from 'https://hamilsauce.github.io/hamhelper/hamhelper1.0.0.js';
 import { svgUnitsToPixels } from './lib/svg-units-to-pixels.js';
 // import {longPress} from 'https://hamilsauce.github.io/hamhelper/hamhelper1.0.0.js';
+const { getPanZoom, } = ham;
+
+getPanZoom(document.querySelector('svg'))
 
 export const setCanvasHeight = (canvas = document.querySelector('svg')) => {
   const parentHeight = +getComputedStyle(canvas.parentElement).height.replace(/[^0-9.]/g, '');
@@ -21,7 +24,7 @@ window.addEventListener('resize', (e) => {
   const canvasEl = document.querySelector('svg')
   const scene = document.querySelector('#scene')
   setCanvasHeight(canvasEl);
-const sceneWidthPixels = svgUnitsToPixels(canvasEl, scene)
+  const sceneWidthPixels = svgUnitsToPixels(canvasEl, scene)
   
   canvasEl.style.width = sceneWidthPixels + 'px'
 });
@@ -146,12 +149,12 @@ appState.listenOn('filepath', async (filepath) => {
 });
 
 
-const pan$ = addPanAction(ui.svg, ({ x, y }) => {
-  ui.svg.viewBox.baseVal.x = x;
-  ui.svg.viewBox.baseVal.y = y;
-});
+// const pan$ = addPanAction(ui.svg, ({ x, y }) => {
+//   ui.svg.viewBox.baseVal.x = x;
+//   ui.svg.viewBox.baseVal.y = y;
+// });
 
-pan$.subscribe();
+// pan$.subscribe();
 
 
 let zoomDragSub = null;
